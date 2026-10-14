@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Cielo Claro: consulta el clima actual y el pronóstico de cinco días." />
+    <title>Cielo Claro | Clima en tu ciudad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="Cielo Claro, inicio">
+          <span class="brand-mark" aria-hidden="true">☼</span>
+          <span>Cielo Claro</span>
+        </a>
+        <span class="api-badge"><span class="status-dot"></span> Datos en vivo</span>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="page-title">
+          <p class="eyebrow">Pronóstico sencillo para decidir tu día</p>
+          <h1 id="page-title">¿Cómo está el cielo?</h1>
+          <p class="hero-copy">Busca una ciudad y consulta el clima actual junto con los próximos cinco días.</p>
+
+          <form class="search-form" id="search-form" novalidate>
+            <label class="sr-only" for="city-input">Ciudad</label>
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="city-input" name="city" type="search" placeholder="Ej. Guadalajara, Madrid, Bogotá" autocomplete="off" required />
+            <button class="search-button" type="submit">Buscar</button>
+          </form>
+          <button class="location-button" id="location-button" type="button">◉ Usar mi ubicación</button>
+          <p class="form-hint" id="form-hint">También puedes buscar por país o región.</p>
+        </section>
+
+        <section class="weather-section" aria-live="polite" aria-busy="false">
+          <div class="loading-state" id="loading-state" hidden>
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Consultando el pronóstico...</span>
+          </div>
+
+          <div class="error-state" id="error-state" hidden role="alert">
+            <span class="error-icon" aria-hidden="true">!</span>
+            <div>
+              <strong id="error-title">No pudimos consultar el clima</strong>
+              <p id="error-message">Revisa tu conexión e inténtalo de nuevo.</p>
+            </div>
+          </div>
+
+          <div id="weather-content" hidden>
+            <div class="location-heading">
+              <div>
+                <p class="eyebrow">Condiciones actuales</p>
+                <h2 id="location-name">Ciudad</h2>
+                <p class="location-meta" id="location-meta">Región, país · Hora local</p>
+              </div>
+              <span class="updated-label" id="updated-label"></span>
+            </div>
+
+            <article class="current-card">
+              <div class="current-main">
+                <span class="weather-symbol" id="current-symbol" aria-hidden="true">☀</span>
+                <div>
+                  <p class="weather-description" id="current-description">Despejado</p>
+                  <p class="temperature"><span id="current-temperature">--</span><sup>°C</sup></p>
+                </div>
+              </div>
+              <div class="current-details">
+                <div class="detail-item"><span>Sensación</span><strong id="feels-like">-- °C</strong></div>
+                <div class="detail-item"><span>Humedad</span><strong id="humidity">-- %</strong></div>
+                <div class="detail-item"><span>Viento</span><strong id="wind">-- km/h</strong></div>
+                <div class="detail-item"><span>Precipitación</span><strong id="precipitation">-- mm</strong></div>
+              </div>
+            </article>
+
+            <div class="forecast-heading">
+              <h3>Próximos días</h3>
+              <span>Máxima / mínima</span>
+            </div>
+            <div class="forecast-grid" id="forecast-grid"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span>Proyecto académico · Tarea 3</span>
+        <span>Fuente: Open-Meteo</span>
+      </footer>
+    </div>
+  </body>
+</html>
