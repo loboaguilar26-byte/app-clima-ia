@@ -27,6 +27,13 @@ También puedes abrir `index.html` directamente, aunque un servidor local es rec
 - Estados de carga, ciudad no encontrada, falta de conexión y permiso de ubicación rechazado.
 - Diseño responsive y etiquetas accesibles para teclado y lectores de pantalla.
 
+## Prueba rápida
+
+- Busca `Monterrey` para comprobar una respuesta válida.
+- Busca `CiudadQueNoExiste999` para comprobar la respuesta vacía.
+- Desconecta la red y realiza una búsqueda para comprobar el mensaje de modo offline.
+- Reduce el ancho del navegador para comprobar la vista responsive.
+
 ## API utilizada
 
 - `https://geocoding-api.open-meteo.com/v1/search`: convierte el nombre de la ciudad en coordenadas.
