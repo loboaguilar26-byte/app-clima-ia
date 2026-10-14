@@ -89,9 +89,16 @@ function showError(title, message) {
 }
 
 async function fetchJson(url) {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  return response.json();
+  if (!navigator.onLine) throw new Error("OFFLINE");
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 async function findCity(query) {
@@ -177,6 +184,8 @@ async function searchCity(event) {
   } catch (error) {
     if (error.message === "CITY_NOT_FOUND") {
       showError("No encontramos esa ciudad", "Prueba con otro nombre, país o región.");
+    } else if (error.message === "OFFLINE") {
+      showError("Sin conexión", "Conéctate a internet para buscar una ciudad.");
     } else {
       showError("No pudimos buscar la ciudad", "Comprueba tu conexión y vuelve a intentarlo.");
     }
